@@ -12,27 +12,18 @@ EXTRA_LIGHT = 0.2
 
 
 def main():
-    light = leglight.discover(2)[0]
-    twilight = -12 * ephem.degree
+    light = leglight.discover(10)[0]
 
-    zone = ZoneInfo("US/Eastern")
-
-    for i in range(24):
-        s = ephem.Sun()
-        bs = ephem.city("Boston")
-        local = datetime.datetime(2024, 6, 1, i, 0, tzinfo=zone)
-        bs.date = ephem.Date(local)
-        s.compute(bs)
-        print(
-            local,
-            max(min(-math.sin(float(ephem.degrees(s.alt))) + EXTRA_LIGHT, 1.0), 0.0),
-            s.alt > twilight,
-        )
-    """if s.alt < twilight:
+    s = ephem.Sun()
+    bs = ephem.city("Boston")
+    s.compute(bs)
+    intensity = max(min(-math.sin(float(ephem.degrees(s.alt))) + EXTRA_LIGHT, 1.0), 0.0)
+    if intensity > 0:
         light.on()
+        light.brightness(intensity * 100)
+        light.color(6500)
     else:
         light.off()
-    print('Is it light in Boston?', s.alt > twilight)"""
 
 
 if __name__ == "__main__":
