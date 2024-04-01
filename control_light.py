@@ -16,6 +16,7 @@ def main():
     bs = ephem.city("Boston")
     s.compute(bs)
     intensity = max(min(-math.sin(float(ephem.degrees(s.alt))) + EXTRA_LIGHT, 1.0), 0.0)
+    print(f"Running control_light... The desired intensity is {intensity}.")
     if intensity > 0:
         light.on()
         light.brightness(intensity * 100)
