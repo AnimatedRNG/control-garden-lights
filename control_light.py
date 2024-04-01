@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-import datetime
 import ephem
 import leglight
 import math
-from zoneinfo import ZoneInfo
 
 
 # Fudge factor to get some extra light.
