@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 leglight = "*"
+ephem = "*"
 
 [dev-packages]
 
